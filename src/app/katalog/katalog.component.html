@@ -1,0 +1,10 @@
+
+<div *ngFor="let article of showArtikles">
+  <label>
+    <input type="checkbox" [ngModel]="article.selected" (change)="toggleSelection(article)" />
+    {{article.id}} {{article.name}} {{article.price}}
+  </label>
+</div>
+
+<button (click)="checkout()">Zur Kasse</button>
+<button (click)="filter()">Filter</button>
