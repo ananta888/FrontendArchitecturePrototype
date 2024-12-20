@@ -1,6 +1,7 @@
-FROM node:20.11.1
+FROM alpine/git
 
 ENV TZ="Europe/Berlin"
+ENV GIT_SSL_CAINFO="/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt"
+
 USER 0:0
-RUN mkdir -p /usr/local/share/ca-certificates/
 COPY OrgaCard-Root-CA.pem /usr/local/share/ca-certificates/OrgaCard-Root-CA.crt
