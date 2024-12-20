@@ -1,0 +1,64 @@
+{
+  "author": "Sergej Malischev, s.malischev@orgacard.de",
+  "name": "Node.js & Angular Dev Container Intellij",
+  "image": "node:20.11.1",
+  //Falls dockerfile nötig ist
+//    "build": {
+//      "dockerfile": "Dockerfile",
+//      "context": "."
+//    },
+  "runArgs": [
+    "--network=host"
+  ],
+
+  "remoteUser": "root",
+
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/OrgaCard-Root-CA.pem,target=/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt,type=bind,consistency=cached",
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+
+  "containerEnv": {
+    "NODE_EXTRA_CA_CERTS": "/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt",
+    "GIT_SSL_CAINFO": "/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt"
+  },
+  "onCreateCommand": {
+    "certificates": "apt-get update && apt-get install -y ca-certificates && update-ca-certificates"
+  },
+  "postCreateCommand": {
+    "certificates": "apt-get update && apt-get install -y ca-certificates && update-ca-certificates",
+    "docker": "apt-get install -y docker.io",
+    "docker-compose": "curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64 -o /usr/bin/docker-compose && chmod +x /usr/bin/docker-compose"
+//    "npm": "npm install -g @angular/cli@18.2.10 nx"
+  },
+
+  "customizations": {
+    "jetbrains": {
+      "plugins": [
+        "com.intellij.angular",
+        "org.jetbrains.plugins.stylus",
+        "com.jetbrains.restClient",
+        "com.intellij.prettierJS",
+        "org.jetbrains.plugins.jest",
+        "dev.nx.console"
+      ],
+      "settings": {
+        "com.intellij:app:HttpConfigurable.use_http_proxy": true,
+        "com.intellij:app:BaseRefactoringSettings.safe_delete_search_in_comments": false,
+        "com.intellij:app:BaseRefactoringSettings.rename_search_in_comments_for_file": false,
+        "com.intellij:app:BaseRefactoringSettings.rename_search_for_references_for_file": false,
+        "com.intellij:app:Vcs-Log-App-Settings.show_changes_from_parents": true,
+        "Docker:app:DockerSettings.dockerComposePath": "/usr/bin/docker-compose",
+        "Docker:app:DockerSettings.dockerPath": "/usr/bin/docker",
+        "com.intellij:app:HttpConfigurable.use_proxy_pac": true,
+        "com.intellij:app:HttpConfigurable.proxy_host": "192.168.9.2",
+        "com.intellij:app:HttpConfigurable.proxy_port": 3128,
+        "com.intellij:app:HttpConfigurable.proxy_exceptions": "*.jetbrains.com"
+      }
+    },
+
+    "settings": {
+      "terminal.integrated.defaultProfile.linux": "bash"
+    }
+  }
+}
