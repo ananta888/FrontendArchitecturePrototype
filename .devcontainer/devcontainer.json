@@ -1,12 +1,12 @@
 {
   "author": "Sergej Malischev, s.malischev@orgacard.de",
   "name": "Node.js & Angular Dev Container Intellij",
-  "image": "node:20.11.1",
+//  "image": "node:20.11.1",
   //Falls dockerfile nötig ist
-//    "build": {
-//      "dockerfile": "Dockerfile",
-//      "context": "."
-//    },
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "."
+    },
   "runArgs": [
     "--network=host"
   ],
@@ -14,7 +14,7 @@
   "remoteUser": "root",
 
   "mounts": [
-    "source=${localWorkspaceFolder}/.devcontainer/OrgaCard-Root-CA.pem,target=/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt,type=bind,consistency=cached",
+//    "source=${localWorkspaceFolder}/.devcontainer/OrgaCard-Root-CA.pem,target=/usr/local/share/ca-certificates/OrgaCard-Root-CA.crt,type=bind,consistency=cached",
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
 
