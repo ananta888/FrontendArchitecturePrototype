@@ -1,4 +1,4 @@
-FROM node:20.11.1
+FROM node:latest
 
 ENV TZ="Europe/Berlin"
 USER 0:0
